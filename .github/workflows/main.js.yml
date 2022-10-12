@@ -26,16 +26,14 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - run : npm install
     - run: npm ci
     - run: npm run build
     - run: npm test
-    - run : npm install
     - name: Checkout Latest Repo
       uses: actions/checkout@master
-        
     - name: Generate Deployment Package 
       run: zip -r deploy.zip * -x "**node_modules**"
-        
     - name: Get timestamp
       uses: gerred/actions/current-time@master
       id: current-time
